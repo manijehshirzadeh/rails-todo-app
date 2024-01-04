@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: %i[ show edit update destroy ]
+  before_action :set_list, only: %i[show edit update destroy]
 
   # GET /lists or /lists.json
   def index
@@ -25,7 +25,10 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to list_url(@list), notice: "List was successfully created." }
+        format.html do
+          redirect_to lists_url,
+                      notice: "The new To-Do was successfully created."
+        end
         format.json { render :show, status: :created, location: @list }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +41,9 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to list_url(@list), notice: "List was successfully updated." }
+        format.html do
+          redirect_to lists_url, notice: "The To-Do was successfully updated."
+        end
         format.json { render :show, status: :ok, location: @list }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +57,22 @@ class ListsController < ApplicationController
     @list.destroy!
 
     respond_to do |format|
-      format.html { redirect_to lists_url, notice: "List was successfully destroyed." }
+      format.html do
+        redirect_to lists_url, notice: "List was successfully destroyed."
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_list
-      @list = List.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def list_params
-      params.require(:list).permit(:description, :string, :completed)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_list
+    @list = List.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def list_params
+    params.require(:list).permit(:description, :string, :completed)
+  end
 end

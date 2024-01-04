@@ -1,4 +1,6 @@
-<p style="color: green"><%= notice %></p>
+<% if flash[:notice] %>
+  <%= render "notification"%>
+<% end%>
 
 <h1>My To-Do Lists</h1>
 
