@@ -1,14 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Lists</h1>
+<h1>My To-Do Lists</h1>
 
 <div id="lists">
-  <% @lists.each do |list| %>
-    <%= render list %>
-    <p>
-      <%= link_to "Show this list", list %>
-    </p>
-  <% end %>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Todo Item</th>
+        <th scope="col">Description</th>
+        <th scope="col">Completed</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @lists.each do |list| %>
+        <%= render list %>
+      <% end %>
+    </tbody>
+  </table> 
 </div>
 
-<%= link_to "New list", new_list_path %>
+<%= link_to "Add a New To-Do", new_list_path %>

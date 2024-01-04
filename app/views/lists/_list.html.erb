@@ -1,17 +1,20 @@
-<div id="<%= dom_id list %>">
-  <p>
-    <strong>Description:</strong>
+<% if list.completed %>
+<tr class="table-secondary"  id="<%= dom_id list %>">
+<%else%>
+<tr class="table-primary"  id="<%= dom_id list %>">
+<%end%>
+  <td>
     <%= list.description %>
-  </p>
-
-  <p>
-    <strong>String:</strong>
+  </td>
+  <td>
     <%= list.string %>
-  </p>
-
-  <p>
-    <strong>Completed:</strong>
+  </td>
+  <td>
     <%= list.completed %>
-  </p>
-
-</div>
+  </td>
+  <td>
+    <%= link_to "Show this list", list %>
+    <%= link_to "Edit", edit_list_path(list) %>
+    <%= button_to "Delete", list, method: :delete, data: {confirm: "Are you sure?"} %>
+  </td>
+</tr>
